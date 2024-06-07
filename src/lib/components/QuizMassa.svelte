@@ -1,17 +1,29 @@
 <script>
-    export let PerguntaEmQuestao = "🤨";
-    export let R1 = "🤨";
-    export let R2 = "🤨";
-    export let R3 = "🤨";
-    export let R4 = "🤨";
+    import { createEventDispatcher } from "svelte";
+
+    export let pergunta_id;
+    export let perguntas;
+
+    const dispatch = createEventDispatcher();
+
+    let perguntaAtual = perguntas[pergunta_id];
+
+    $: perguntaAtual = perguntas[pergunta_id];
+
+    function handleAnswer() {
+        // Dispara o evento 'next' quando uma resposta é escolhida
+        dispatch('next');
+    }
 </script>
+
 <div class="bulletpoints">
-    <h3>{PerguntaEmQuestao}</h3>
-    <button>{R1}</button>
-    <button>{R2}</button>
-    <button>{R3}</button>
-    <button>{R4}</button>
+    <h3>{perguntaAtual.PerguntaEmQuestao}</h3>
+    <button on:click={handleAnswer}>{perguntaAtual.R1}</button>
+    <button on:click={handleAnswer}>{perguntaAtual.R2}</button>
+    <button on:click={handleAnswer}>{perguntaAtual.R3}</button>
+    <button on:click={handleAnswer}>{perguntaAtual.R4}</button>
 </div>
+
 <style>
     .bulletpoints {
         display: flex;
@@ -34,7 +46,7 @@
         border: inherit;
         cursor: pointer;
     }
-    .bulletpoints button:hover{
+    .bulletpoints button:hover {
         transform: scale(1.02);
     }
 </style>
