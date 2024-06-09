@@ -1,7 +1,10 @@
 <footer>
-    cu
+    <!--
+    <p>(Footer)</p>
+    -->
 </footer>
 <style>
+    /*
     footer{
         background-color: var(--color-BG4);
         padding: 1rem;
@@ -9,4 +12,5 @@
         position: fixed;
         bottom: 0px;
     }
+    */
 </style>
