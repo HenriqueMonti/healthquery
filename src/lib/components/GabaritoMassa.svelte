@@ -15,29 +15,19 @@
     function handleNext() {
         dispatch('next');
     }
+
+    const respostas = ['R1', 'R2', 'R3', 'R4'];
 </script>
 
 <div class="gabarito">
     <p>Pergunta {pergunta_id + 1} de {perguntas.length}</p>
     <h3 class="pergunta">{perguntaAtual.PerguntaEmQuestao}</h3>
-    <!--rick, velho, se vc estiver lendo isso me desculpa ai kkkkkkkkk-->
-    <!--cadê o meu for i=1,4 do print(i) end? :pensive:-->
-    <button 
-        class="resposta {respostaSelecionada === 1 ? (acertouUltima ? 'correta' : 'errada') : ''} {perguntaAtual.correta === 1 ? 'corretaBorda' : ''}">
-        {perguntaAtual.R1} {respostaSelecionada === 1 ? (acertouUltima ? '✔️' : '❌') : ''}
-    </button>
-    <button 
-        class="resposta {respostaSelecionada === 2 ? (acertouUltima ? 'correta' : 'errada') : ''} {perguntaAtual.correta === 2 ? 'corretaBorda' : ''}">
-        {perguntaAtual.R2} {respostaSelecionada === 2 ? (acertouUltima ? '✔️' : '❌') : ''}
-    </button>
-    <button 
-        class="resposta {respostaSelecionada === 3 ? (acertouUltima ? 'correta' : 'errada') : ''} {perguntaAtual.correta === 3 ? 'corretaBorda' : ''}">
-        {perguntaAtual.R3} {respostaSelecionada === 3 ? (acertouUltima ? '✔️' : '❌') : ''}
-    </button>
-    <button 
-        class="resposta {respostaSelecionada === 4 ? (acertouUltima ? 'correta' : 'errada') : ''} {perguntaAtual.correta === 4 ? 'corretaBorda' : ''}">
-        {perguntaAtual.R4} {respostaSelecionada === 4 ? (acertouUltima ? '✔️' : '❌') : ''}
-    </button>
+    {#each respostas as resposta, index}
+        <button 
+            class="resposta {respostaSelecionada === index + 1 ? (acertouUltima ? 'correta' : 'errada') : ''} {perguntaAtual.correta === index + 1 ? 'corretaBorda' : ''}">
+            {perguntaAtual[resposta]} {respostaSelecionada === index + 1 ? (acertouUltima ? '✔️' : '❌') : ''}
+        </button>
+    {/each}
     <p>{acertouUltima ? "Você acertou!" : "Você errou!"}</p>
     <button class="avancar" on:click={handleNext}>Avançar</button>
 </div>
