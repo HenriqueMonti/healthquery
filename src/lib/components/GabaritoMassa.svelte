@@ -4,6 +4,7 @@
     export let pergunta_id;
     export let perguntas;
     export let acertouUltima;
+    export let respostaSelecionada;
 
     const dispatch = createEventDispatcher();
 
@@ -18,9 +19,26 @@
 
 <div class="gabarito">
     <h3>{perguntaAtual.PerguntaEmQuestao}</h3>
-    <p>Resposta correta: {perguntaAtual[`R${perguntaAtual.correta}`]}</p>
+    <!--rick, velho, se vc estiver lendo isso me desculpa ai kkkkkkkkk-->
+    <!--cadê o meu for i=1,4 do print(i) end? :pensive:-->
+    <button 
+        class="resposta {respostaSelecionada === 1 ? (acertouUltima ? 'correta' : 'errada') : ''} {perguntaAtual.correta === 1 ? 'corretaBorda' : ''}">
+        {perguntaAtual.R1} {respostaSelecionada === 1 ? (acertouUltima ? '✔️' : '❌') : ''}
+    </button>
+    <button 
+        class="resposta {respostaSelecionada === 2 ? (acertouUltima ? 'correta' : 'errada') : ''} {perguntaAtual.correta === 2 ? 'corretaBorda' : ''}">
+        {perguntaAtual.R2} {respostaSelecionada === 2 ? (acertouUltima ? '✔️' : '❌') : ''}
+    </button>
+    <button 
+        class="resposta {respostaSelecionada === 3 ? (acertouUltima ? 'correta' : 'errada') : ''} {perguntaAtual.correta === 3 ? 'corretaBorda' : ''}">
+        {perguntaAtual.R3} {respostaSelecionada === 3 ? (acertouUltima ? '✔️' : '❌') : ''}
+    </button>
+    <button 
+        class="resposta {respostaSelecionada === 4 ? (acertouUltima ? 'correta' : 'errada') : ''} {perguntaAtual.correta === 4 ? 'corretaBorda' : ''}">
+        {perguntaAtual.R4} {respostaSelecionada === 4 ? (acertouUltima ? '✔️' : '❌') : ''}
+    </button>
     <p>{acertouUltima ? "Você acertou!" : "Você errou!"}</p>
-    <button on:click={handleNext}>Avançar</button>
+    <button class="avancar" on:click={handleNext}>Avançar</button>
 </div>
 
 <style>
@@ -29,7 +47,6 @@
         flex-direction: column;
         gap: 1rem;
         align-items: center;
-        text-align: center;
     }
     .gabarito button {
         width: 100%;
@@ -37,16 +54,35 @@
         text-align: center;
         color: black;
         font-weight: 600;
-        padding: 1em;
+        padding: calc(1em - 2px);
         background: var(--color-BG3);
         border-radius: 1em;
         text-decoration: none;
         transition: 200ms;
         font-family: inherit;
         border: inherit;
-        cursor: pointer;
+        cursor: default;
+        border: 2px solid transparent;
     }
-    .gabarito button:hover {
+    .gabarito .resposta:hover {
+        transform: none;
+    }
+    .resposta.correta {
+        background-color: green;
+        color: white;
+    }
+    .resposta.errada {
+        background-color: red;
+        color: white;
+    }
+    .resposta.corretaBorda {
+        border-color: green;
+    }
+    .gabarito .avancar {
+        cursor: pointer;
+        transition: 200ms;
+    }
+    .gabarito .avancar:hover {
         transform: scale(1.02);
     }
 </style>
