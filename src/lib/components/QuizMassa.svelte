@@ -19,7 +19,7 @@
 </script>
 
 <div class="bulletpoints">
-    <h3>{perguntaAtual.PerguntaEmQuestao}</h3>
+    <h3 class="pergunta">{perguntaAtual.PerguntaEmQuestao}</h3>
     <button on:click={() => handleAnswer(1)}>{perguntaAtual.R1}</button>
     <button on:click={() => handleAnswer(2)}>{perguntaAtual.R2}</button>
     <button on:click={() => handleAnswer(3)}>{perguntaAtual.R3}</button>
@@ -27,6 +27,9 @@
 </div>
 
 <style>
+    .pergunta {
+        max-width: 48rem;
+    }
     .bulletpoints {
         display: flex;
         flex-direction: column;
@@ -35,11 +38,11 @@
     }
     .bulletpoints button {
         width: 100%;
-        max-width: 13rem;
+        max-width: 48rem;
         text-align: center;
         color: black;
         font-weight: 600;
-        padding: 1em;
+        padding: 4vh;
         background: var(--color-BG3);
         border-radius: 1em;
         text-decoration: none;

@@ -18,7 +18,7 @@
 </script>
 
 <div class="gabarito">
-    <h3>{perguntaAtual.PerguntaEmQuestao}</h3>
+    <h3 class="pergunta">{perguntaAtual.PerguntaEmQuestao}</h3>
     <!--rick, velho, se vc estiver lendo isso me desculpa ai kkkkkkkkk-->
     <!--cadê o meu for i=1,4 do print(i) end? :pensive:-->
     <button 
@@ -42,6 +42,9 @@
 </div>
 
 <style>
+    .pergunta {
+        max-width: 48rem;
+    }
     .gabarito {
         display: flex;
         flex-direction: column;
@@ -50,11 +53,11 @@
     }
     .gabarito button {
         width: 100%;
-        max-width: 13rem;
+        max-width: 48rem;
         text-align: center;
         color: black;
         font-weight: 600;
-        padding: calc(1em - 2px);
+        padding: calc(4vh - 2px);
         background: var(--color-BG3);
         border-radius: 1em;
         text-decoration: none;
