@@ -19,6 +19,7 @@
 </script>
 
 <div class="bulletpoints">
+    <p>Pergunta {pergunta_id + 1} de {perguntas.length}</p>
     <h3 class="pergunta">{perguntaAtual.PerguntaEmQuestao}</h3>
     <button on:click={() => handleAnswer(1)}>{perguntaAtual.R1}</button>
     <button on:click={() => handleAnswer(2)}>{perguntaAtual.R2}</button>

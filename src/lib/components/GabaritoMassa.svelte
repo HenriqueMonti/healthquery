@@ -18,6 +18,7 @@
 </script>
 
 <div class="gabarito">
+    <p>Pergunta {pergunta_id + 1} de {perguntas.length}</p>
     <h3 class="pergunta">{perguntaAtual.PerguntaEmQuestao}</h3>
     <!--rick, velho, se vc estiver lendo isso me desculpa ai kkkkkkkkk-->
     <!--cadê o meu for i=1,4 do print(i) end? :pensive:-->
