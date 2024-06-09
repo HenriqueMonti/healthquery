@@ -1,6 +1,9 @@
 <script>
     import { createEventDispatcher } from "svelte";
 
+    /**
+	 * @type {number}
+	*/
     export let pergunta_id;
     export let perguntas;
     export let acertouUltima;
@@ -28,7 +31,7 @@
             {perguntaAtual[resposta]} {respostaSelecionada === index + 1 ? (acertouUltima ? '✔️' : '❌') : ''}
         </button>
     {/each}
-    <p>{acertouUltima ? "Você acertou!" : "Você errou!"}</p>
+    <h4><i>{acertouUltima ? "Você acertou!" : "Você errou!"}</i></h4>
     <button class="avancar" on:click={handleNext}>Avançar</button>
 </div>
 

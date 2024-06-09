@@ -110,8 +110,9 @@
             respondeu = false;
             respostaSelecionada = 0;
         } else {
-            alert(`Quiz concluído! Você acertou ${acertou} de ${perguntas.length} perguntas.`);
-            location.reload();
+            let texto = `Quiz concluído! Você acertou ${acertou} de ${perguntas.length} perguntas.`;
+            localStorage.setItem('texto', texto);
+            window.location.href = '/quiz/resultado';
         }
     }
 </script>
