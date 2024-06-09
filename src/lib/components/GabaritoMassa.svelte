@@ -3,6 +3,7 @@
 
     export let pergunta_id;
     export let perguntas;
+    export let acertouUltima;
 
     const dispatch = createEventDispatcher();
 
@@ -10,30 +11,27 @@
 
     $: perguntaAtual = perguntas[pergunta_id];
 
-    /**
-	 * @param {number} resposta
-	*/
-    function handleAnswer(resposta) {
-        dispatch('answer', resposta);
+    function handleNext() {
+        dispatch('next');
     }
 </script>
 
-<div class="bulletpoints">
+<div class="gabarito">
     <h3>{perguntaAtual.PerguntaEmQuestao}</h3>
-    <button on:click={() => handleAnswer(1)}>{perguntaAtual.R1}</button>
-    <button on:click={() => handleAnswer(2)}>{perguntaAtual.R2}</button>
-    <button on:click={() => handleAnswer(3)}>{perguntaAtual.R3}</button>
-    <button on:click={() => handleAnswer(4)}>{perguntaAtual.R4}</button>
+    <p>Resposta correta: {perguntaAtual[`R${perguntaAtual.correta}`]}</p>
+    <p>{acertouUltima ? "Você acertou!" : "Você errou!"}</p>
+    <button on:click={handleNext}>Avançar</button>
 </div>
 
 <style>
-    .bulletpoints {
+    .gabarito {
         display: flex;
         flex-direction: column;
         gap: 1rem;
         align-items: center;
+        text-align: center;
     }
-    .bulletpoints button {
+    .gabarito button {
         width: 100%;
         max-width: 13rem;
         text-align: center;
@@ -48,7 +46,7 @@
         border: inherit;
         cursor: pointer;
     }
-    .bulletpoints button:hover {
+    .gabarito button:hover {
         transform: scale(1.02);
     }
 </style>
