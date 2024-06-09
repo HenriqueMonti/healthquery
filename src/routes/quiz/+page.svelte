@@ -1,6 +1,7 @@
 <script>
     import QuizMassa from "$components/QuizMassa.svelte";
     import GabaritoMassa from "$components/GabaritoMassa.svelte";
+	import { goto } from "$app/navigation";
 
     let perguntas = [
         {
@@ -112,7 +113,7 @@
         } else {
             let texto = `Quiz concluído! Você acertou ${acertou} de ${perguntas.length} perguntas.`;
             localStorage.setItem('texto', texto);
-            window.location.href = '/quiz/resultado';
+            goto('/quiz/resultado');
         }
     }
 </script>
