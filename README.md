@@ -1,7 +1,11 @@
+# HealthQuery
+
+Um aplicativo gamificado com recursos interativos e módulos de aprendizado sobre a saúde em geral, como nutrilção, exercícios e saúde mental.
+
 ### EQUIPE
 - Jean Kenji N. Saito (CEO e Front-End)
 - Henrique Alves Monti (DEV geral)
-- Rodrigo Peña Rodrigues (Gerente do projeto)
+- Rodrigo Peña Rodrigues (Gerente de projeto)
 
 <details>
 <summary>Instruções do Svelte:</summary>
