@@ -17,10 +17,10 @@
         width: 100%;
         max-width: 13rem;
         text-align: center;
-        color: black;
+        color: var(--color-BG);
         font-weight: 600;
         padding: 1em;
-        background: var(--color-BG3);
+        background: var(--color-BT);
         border-radius: 1em;
         text-decoration: none;
         transition: 200ms;

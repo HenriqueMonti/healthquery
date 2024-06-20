@@ -30,6 +30,7 @@
 <style>
     .pergunta {
         max-width: 48rem;
+        color: var(--color-TEXTO-OFF);
     }
     .bulletpoints {
         display: flex;
@@ -41,10 +42,10 @@
         width: 100%;
         max-width: 48rem;
         text-align: center;
-        color: black;
+        color: var(--color-BG);
         font-weight: 600;
         padding: 4vh;
-        background: var(--color-BG3);
+        background: var(--color-BT);
         border-radius: 1em;
         text-decoration: none;
         transition: 200ms;

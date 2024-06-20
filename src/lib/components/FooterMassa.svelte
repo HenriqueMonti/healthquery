@@ -6,7 +6,7 @@
 <style>
     /*
     footer{
-        background-color: var(--color-BG4);
+        background-color: var(--color-HEADER);
         padding: 1rem;
         width: 100%;
         position: fixed;

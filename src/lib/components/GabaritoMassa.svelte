@@ -38,6 +38,7 @@
 <style>
     .pergunta {
         max-width: 48rem;
+        color: var(--color-TEXTO-OFF);
     }
     .gabarito {
         display: flex;
@@ -49,10 +50,10 @@
         width: 100%;
         max-width: 48rem;
         text-align: center;
-        color: black;
+        color: var(--color-BG);
         font-weight: 600;
         padding: calc(4vh - 2px);
-        background: var(--color-BG3);
+        background: var(--color-BT-OFF);
         border-radius: 1em;
         text-decoration: none;
         transition: 200ms;
@@ -65,21 +66,24 @@
         transform: none;
     }
     .resposta.correta {
-        background-color: green;
+        background-color: var(--color-BT-CORRETO);
         color: white;
     }
     .resposta.errada {
-        background-color: red;
+        background-color: var(--color-BT-INCORRETO);
         color: white;
     }
     .resposta.corretaBorda {
-        border-color: green;
+        background-color: var(--color-BT-CORRETO);
     }
     .gabarito .avancar {
+        background-color: transparent;
+        color: var(--color-TEXTO-OFF);
         cursor: pointer;
         transition: 200ms;
+        border: 2px solid;
     }
     .gabarito .avancar:hover {
-        transform: scale(1.02);
+        transform: scale(1.05);
     }
 </style>

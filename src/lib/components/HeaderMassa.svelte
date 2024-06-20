@@ -3,7 +3,7 @@
 </header>
 <style>
     header{
-        background-color: var(--color-BG4);
+        background-color: var(--color-HEADER);
         padding: 1rem;
         width: 100%;
         position: fixed;
@@ -12,6 +12,6 @@
     }
     a{
         text-decoration: none;
-        color: black;
+        color: var(--color-BG);
     }
 </style>
