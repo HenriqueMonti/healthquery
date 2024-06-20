@@ -1,5 +1,5 @@
 <header>
-    <h1><a href="/">Health<i>y</i>Query</a></h1>
+    <h1><a href="/">HealthQuery</a></h1>
 </header>
 <style>
     header{
@@ -13,8 +13,5 @@
     a{
         text-decoration: none;
         color: black;
-    }
-    i{
-        color: red;
     }
 </style>
