@@ -112,7 +112,7 @@
             respostaSelecionada = 0;
         } else {
             let texto = `Quiz concluído! Você acertou ${acertou} de ${perguntas.length} perguntas.`;
-            localStorage.setItem('texto', texto);
+            sessionStorage.setItem('texto', texto);
             goto('/quiz/resultado');
         }
     }

@@ -5,11 +5,11 @@
     
     onMount(() => {
         // @ts-ignore
-        texto = localStorage.getItem('texto');
+        texto = sessionStorage.getItem('texto');
         if (texto === null) {
             window.location.href = '/';
         }else{
-            localStorage.removeItem('texto'); // Limpar o texto do armazenamento local após o uso
+            sessionStorage.removeItem('texto'); // Limpar o texto do armazenamento local após o uso
         }
     });
 </script>
