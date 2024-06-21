@@ -3,8 +3,9 @@
     import GabaritoMassa from "$components/GabaritoMassa.svelte";
 	import { goto } from "$app/navigation";
     import { loadFromSessionStorage, saveToSessionStorage } from '../../sessionStorage';
+	import { saveData } from "$lib";
 
-    let perguntas = [
+    let perguntas_real = [
         {
             PerguntaEmQuestao: "Qual é a quantidade recomendada de exercício físico por semana?",
             R1: "75 minutos de atividade intensa",
@@ -87,6 +88,22 @@
         },
     ];
 
+    let perguntasEmbaralhadas = shuffle(perguntas_real);
+    let metade = Math.floor(perguntas_real.length / 2);
+    let perguntas = perguntasEmbaralhadas.slice(0, metade);
+
+    // Função para embaralhar um array (algoritmo de Fisher-Yates)
+    /**
+	 * @param {any} array
+	 */
+    function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]]; // Troca de lugar
+        }
+        return array;
+    }
+
     let pergunta_id = 0;
     let acertou = 0;
     let respondeu = false;
@@ -115,7 +132,14 @@
             let texto = `Quiz concluído! Você acertou ${acertou} de ${perguntas.length} perguntas.`;
             sessionStorage.setItem('texto', texto);
             goto('/quiz/resultado');
-            saveToSessionStorage("dinheiro", Number(loadFromSessionStorage("dinheiro") || 0) + acertou)
+            let dinheiros = Number(loadFromSessionStorage("dinheiro") || 0)
+            saveToSessionStorage("dinheiro", dinheiros + acertou)
+            const exampleData = {
+                name: 'USUÁRIO_ANÔNIMO_3000',
+                dinheiro: dinheiros,
+                email: 'exemplo@univag.edu.br'
+            };
+            saveData('users/user1', exampleData);
         }
     }
 </script>
