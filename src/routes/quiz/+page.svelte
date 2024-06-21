@@ -115,7 +115,7 @@
             let texto = `Quiz concluído! Você acertou ${acertou} de ${perguntas.length} perguntas.`;
             sessionStorage.setItem('texto', texto);
             goto('/quiz/resultado');
-            saveToSessionStorage("dinheiro", (loadFromSessionStorage("dinheiro") || 0) + acertou)
+            saveToSessionStorage("dinheiro", Number(loadFromSessionStorage("dinheiro") || 0) + acertou)
         }
     }
 </script>
