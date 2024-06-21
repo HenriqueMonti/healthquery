@@ -1,9 +1,10 @@
 <script>
     import QuizMassa from "$components/QuizMassa.svelte";
     import GabaritoMassa from "$components/GabaritoMassa.svelte";
-	import { goto } from "$app/navigation";
     import { loadFromSessionStorage, saveToSessionStorage } from '../../sessionStorage';
+	import { goto } from "$app/navigation";
 	import { saveData } from "$lib";
+    import { dinheiro } from '../../stores';
 
     let perguntas_real = [
         {
@@ -132,11 +133,10 @@
             let texto = `Quiz concluído! Você acertou ${acertou} de ${perguntas.length} perguntas.`;
             sessionStorage.setItem('texto', texto);
             goto('/quiz/resultado');
-            let dinheiros = Number(loadFromSessionStorage("dinheiro") || 0)
-            saveToSessionStorage("dinheiro", dinheiros + acertou)
+            dinheiro.update(currentValue => currentValue + acertou);
             const exampleData = {
                 name: 'USUÁRIO_ANÔNIMO_3000',
-                dinheiro: dinheiros,
+                dinheiro: loadFromSessionStorage("dinheiro"),
                 email: 'exemplo@univag.edu.br'
             };
             saveData('users/user1', exampleData);
