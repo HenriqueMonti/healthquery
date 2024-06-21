@@ -136,7 +136,7 @@
             dinheiro.update(currentValue => currentValue + acertou);
             const exampleData = {
                 name: 'USUÁRIO_ANÔNIMO_3000',
-                dinheiro: loadFromSessionStorage("dinheiro"),
+                dinheiro: Number(loadFromSessionStorage("dinheiro") || 0),
                 email: 'exemplo@univag.edu.br'
             };
             saveData('users/user1', exampleData);
