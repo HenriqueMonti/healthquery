@@ -2,6 +2,7 @@
     import QuizMassa from "$components/QuizMassa.svelte";
     import GabaritoMassa from "$components/GabaritoMassa.svelte";
 	import { goto } from "$app/navigation";
+    import { loadFromSessionStorage, saveToSessionStorage } from '../../sessionStorage';
 
     let perguntas = [
         {
@@ -114,6 +115,7 @@
             let texto = `Quiz concluído! Você acertou ${acertou} de ${perguntas.length} perguntas.`;
             sessionStorage.setItem('texto', texto);
             goto('/quiz/resultado');
+            saveToSessionStorage("dinheiro", (loadFromSessionStorage("dinheiro") || 0) + acertou)
         }
     }
 </script>
