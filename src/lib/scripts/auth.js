@@ -3,6 +3,7 @@ import { writable } from 'svelte/store';
 
 // Define a store para o estado de autenticação
 export const isAuthenticated = writable(false);
+/*setContext("isAuthenticated", isAuthenticated)*/
 
 // Função de login com tipos explícitos
 export async function login(email, password) {
@@ -11,6 +12,7 @@ export async function login(email, password) {
         isAuthenticated.set(true);
     } catch (error) {
         console.error('Erro ao autenticar: ', error);
+        return false
     }
 }
 
