@@ -1,3 +1,7 @@
+import { initializeApp } from "firebase/app";
+import { getDatabase, ref, set, get, update } from "firebase/database";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail, sendEmailVerification, updateProfile } from "firebase/auth";
+
 export const firebaseConfig = {
     apiKey: "AIzaSyAuqFJhTiKYRHOUBdRK_IMkqjnPoGLXQR8",
     authDomain: "healthquery-c5256.firebaseapp.com",
