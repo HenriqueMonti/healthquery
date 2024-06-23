@@ -1,11 +1,11 @@
 <script>
     import QuizMassa from "$components/QuizMassa.svelte";
     import GabaritoMassa from "$components/GabaritoMassa.svelte";
-    import { loadFromSessionStorage, saveToSessionStorage } from '../../sessionStorage';
+    import { loadFromSessionStorage, saveToSessionStorage } from '$scripts/sessionStorage';
 	import { goto } from "$app/navigation";
-	import { saveData } from "$lib";
-    import { dinheiro } from '../../stores';
-    import { listaDePerguntas } from "./perguntas.js";
+	import { saveData } from "$lib/scripts/firebase";
+    import { dinheiro } from '$scripts/stores';
+    import { listaDePerguntas } from "$scripts/perguntas.js";
 
     let perguntasEmbaralhadas = shuffle(listaDePerguntas);
     let metade = Math.floor(listaDePerguntas.length / 2);

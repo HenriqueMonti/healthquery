@@ -80,3 +80,54 @@ export const listaDePerguntas = [
         correta: 3
     },
 ];
+
+export const listaDeCheckup = [
+    {
+        PerguntaEmQuestao: "Quanto tempo você dormiu essa noite?",
+        TipoResposta: "Number"
+    },
+    {
+        PerguntaEmQuestao: "Quantos ml de água você bebeu hoje?",
+        TipoResposta: "Number"
+    },
+    {
+        PerguntaEmQuestao: "Você comeu algo prejudicial à saúde hoje? Se sim, escreva uma lista dos mesmos.",
+        TipoResposta: "Input"
+    },
+    {
+        PerguntaEmQuestao: "Quanto tempo você se exercitou hoje? (fora do ambiente de trabalho)",
+        TipoResposta: "Horas"
+    },
+    {
+        PerguntaEmQuestao: "Você comeu alguma verdura ou fruta hoje?",
+        TipoResposta: "SimNao"
+    },
+    {
+        PerguntaEmQuestao: "Você dormiu sem nenhuma luz no ambiente?",
+        TipoResposta: "SimNao"
+    },
+    {
+        PerguntaEmQuestao: "Você teve um dia feliz hoje?",
+        TipoResposta: "SimNao"
+    },
+    {
+        PerguntaEmQuestao: "Você separou um momento do dia para estudos?",
+        TipoResposta: "SimNao"
+    },
+    {
+        PerguntaEmQuestao: "Você costuma preparar suas próprias refeições em vez de comer fora?",
+        TipoResposta: "SimNao"
+    },
+    {
+        PerguntaEmQuestao: "Você evita o uso de tabaco e limita o consumo de álcool?",
+        TipoResposta: "SimNao"
+    },
+    {
+        PerguntaEmQuestao: "Você tem um hobby ou atividade que pratica regularmente para relaxar?",
+        TipoResposta: "SimNao"
+    },
+    {
+        PerguntaEmQuestao: "Você faz check-ups médicos regulares e segue as orientações de saúde preventiva?",
+        TipoResposta: "SimNao"
+    }
+];

@@ -1,11 +1,9 @@
 <script>
-	//import { saveToSessionStorage } from '../../sessionStorage';
-    import { dinheiro } from '../../stores';
-    //saveToSessionStorage("dinheiro", 10)
+    import { dinheiro } from '$scripts/stores';
 </script>
 <header>
     <h1><a href="/">HealthQuery</a></h1>
-    <h3>{$dinheiro} 🪙</h3>
+    <h3>{$dinheiro} <i class="fa-solid fa-circle-dollar-to-slot"></i></h3>
 </header>
 <style>
     header{

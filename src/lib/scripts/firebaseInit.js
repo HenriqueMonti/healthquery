@@ -1,8 +1,7 @@
-// src/firebase.js
 import { initializeApp } from 'firebase/app';
 import { getAuth,signInWithEmailAndPassword}from 'firebase/auth';
 import { getDatabase } from 'firebase/database';
-import { firebaseConfig } from '../BDMS/firebaseConfig';
+import { firebaseConfig } from '$scripts/firebaseConfig';
 
 // Inicialize o Firebase
 const app = initializeApp(firebaseConfig);

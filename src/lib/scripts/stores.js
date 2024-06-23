@@ -1,5 +1,5 @@
 // @ts-nocheck
-// src/stores.js
+
 import { writable } from 'svelte/store';
 import { saveToSessionStorage, loadFromSessionStorage } from './sessionStorage';
 

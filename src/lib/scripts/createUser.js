@@ -6,7 +6,7 @@
  */
 
 import { ref, set } from "firebase/database";
-import { database } from "./firebase";
+import { database } from "$scripts/firebaseInit";
 import * as bcrypt from 'bcrypt';
 
 
