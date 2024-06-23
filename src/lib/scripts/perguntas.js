@@ -83,50 +83,62 @@ export const listaDePerguntas = [
 
 export const listaDeCheckup = [
     {
+        NomePergunta: "HorasDormiu",
         PerguntaEmQuestao: "Quanto tempo você dormiu essa noite?",
-        TipoResposta: "Number"
+        TipoResposta: "Horas"
     },
     {
-        PerguntaEmQuestao: "Quantos ml de água você bebeu hoje?",
-        TipoResposta: "Number"
+        NomePergunta: "CoposBebeu",
+        PerguntaEmQuestao: "Quantos copos de água você bebeu hoje?",
+        TipoResposta: "Copos"
     },
     {
+        NomePergunta: "ComidasPrejudiciais",
         PerguntaEmQuestao: "Você comeu algo prejudicial à saúde hoje? Se sim, escreva uma lista dos mesmos.",
         TipoResposta: "Input"
     },
     {
+        NomePergunta: "HorasExercicio",
         PerguntaEmQuestao: "Quanto tempo você se exercitou hoje? (fora do ambiente de trabalho)",
         TipoResposta: "Horas"
     },
     {
+        NomePergunta: "IsFruta",
         PerguntaEmQuestao: "Você comeu alguma verdura ou fruta hoje?",
         TipoResposta: "SimNao"
     },
     {
+        NomePergunta: "IsEscuro",
         PerguntaEmQuestao: "Você dormiu sem nenhuma luz no ambiente?",
         TipoResposta: "SimNao"
     },
     {
+        NomePergunta: "IsFeliz",
         PerguntaEmQuestao: "Você teve um dia feliz hoje?",
         TipoResposta: "SimNao"
     },
     {
+        NomePergunta: "IsSmart",
         PerguntaEmQuestao: "Você separou um momento do dia para estudos?",
         TipoResposta: "SimNao"
     },
     {
+        NomePergunta: "IsCozinheiro",
         PerguntaEmQuestao: "Você costuma preparar suas próprias refeições em vez de comer fora?",
         TipoResposta: "SimNao"
     },
     {
+        NomePergunta: "IsProerd",
         PerguntaEmQuestao: "Você evita o uso de tabaco e limita o consumo de álcool?",
         TipoResposta: "SimNao"
     },
     {
+        NomePergunta: "IsBob",
         PerguntaEmQuestao: "Você tem um hobby ou atividade que pratica regularmente para relaxar?",
         TipoResposta: "SimNao"
     },
     {
+        NomePergunta: "IsPreventivo",
         PerguntaEmQuestao: "Você faz check-ups médicos regulares e segue as orientações de saúde preventiva?",
         TipoResposta: "SimNao"
     }

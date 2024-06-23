@@ -1,6 +1,5 @@
 import adapter from '@sveltejs/adapter-auto';
 
-/** @type {import('@sveltejs/kit').Config} */
 const config = {
 	kit: {
 		// adapter-auto only supports some environments, see https://kit.svelte.dev/docs/adapter-auto for a list.
@@ -9,7 +8,8 @@ const config = {
 		adapter: adapter(),
 		alias: {
             $components: 'src/lib/components',
-            $scripts: 'src/lib/scripts'
+            $scripts: 'src/lib/scripts',
+            $images: 'src/lib/images'
         }
 	}
 };
