@@ -1,20 +1,7 @@
-
-/**
- * @param {string} userId
- * @param {string} email
- * @param {string} password
- */
-
 import { ref, set } from "firebase/database";
 import { database } from "$scripts/firebaseInit";
 import * as bcrypt from 'bcrypt';
 
-
-/**
- * @param {string} userId
- * @param {string} email
- * @param {string} password
- */
 export function createUser(userId, email, password) {
     // Hash da senha usando bcrypt
     const passwordHash = bcrypt.hashSync(password, 12);
@@ -34,7 +21,7 @@ export function createUser(userId, email, password) {
         .then(() => {
             console.log('Usuário criado com sucesso!');
         })
-        .catch((/** @type {any} */ error) => {
+        .catch((error) => {
             console.error('Erro ao criar usuário:', error);
         });
 }

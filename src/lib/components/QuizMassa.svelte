@@ -10,9 +10,6 @@
 
     $: perguntaAtual = perguntas[pergunta_id];
 
-    /**
-	 * @param {number} resposta
-	*/
     function handleAnswer(resposta) {
         dispatch('answer', resposta);
     }

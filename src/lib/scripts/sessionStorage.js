@@ -11,10 +11,6 @@ function isSessionStorageAvailable() {
     }
 }
 
-/**
- * @param {string} key
- * @param {any} value
- */
 export function saveToSessionStorage(key, value) {
     if (isSessionStorageAvailable()) {
         sessionStorage.setItem(key, JSON.stringify(value));
@@ -23,9 +19,6 @@ export function saveToSessionStorage(key, value) {
     }
 }
 
-/**
- * @param {string} key
- */
 export function loadFromSessionStorage(key) {
     if (isSessionStorageAvailable()) {
         const storedValue = sessionStorage.getItem(key);
@@ -34,4 +27,4 @@ export function loadFromSessionStorage(key) {
         console.warn('Problema ao loadar: sessionStorage não está disponível.');
         return null;
     }
-  }
+}

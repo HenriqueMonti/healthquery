@@ -12,9 +12,6 @@
     let perguntas = perguntasEmbaralhadas.slice(0, metade);
 
     // Função para embaralhar um array (algoritmo de Fisher-Yates)
-    /**
-	 * @param {any} array
-	 */
     function shuffle(array) {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -29,9 +26,6 @@
     let acertouUltima = false;
     let respostaSelecionada = 0;
 
-    /**
-	 * @param {{ detail: number; }} e
-	*/
     function handleAnswer(e) {
         respostaSelecionada = e.detail;
         const perguntaAtual = perguntas[pergunta_id];

@@ -1,9 +1,6 @@
 <script>
     import { createEventDispatcher } from "svelte";
 
-    /**
-	 * @type {number}
-	*/
     export let pergunta_id;
     export let perguntas;
     export let acertouUltima;
