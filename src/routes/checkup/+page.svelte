@@ -8,7 +8,6 @@
         const formData = new FormData(event.target);
         const data = {};
         formData.forEach((value, key) => {
-            console.log(key);
             data[key] = value;
         });
         addData('users/user1/checkup', data);

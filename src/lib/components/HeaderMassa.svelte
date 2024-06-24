@@ -1,45 +1,40 @@
 <script>
+	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
+	import { auth } from '$scripts/firebaseInit';
     import { dinheiro } from '$scripts/stores';
-	//import { getContext } from 'svelte';
-    let estalogado = false;
-    //const isAuthenticated = getContext("isAuthenticated");
-    //alert(isAuthenticated)
-    let mostrarBotao = true;
-    /*
-    (function() {
-    let currentPath;
-    if (window){
-        currentPath = window.location.pathname;
-    }
+	import { signOut } from 'firebase/auth';
 
-    function onPathChange(newPath) {
-        if (window.location.pathname === "/login"){
-            mostrarBotao = false;
+    export async function logout() {
+        try {
+            await signOut(auth);
+            console.log('Usuário deslogado com sucesso');
+        } catch (error) {
+            console.error('Erro ao deslogar: ', error);
         }
     }
 
-    setInterval(() => {
-      if (window && window.location.pathname !== currentPath) {
-        currentPath = window.location.pathname;
-        onPathChange(currentPath);
-      }
-    }, 100); // Verifica a cada 100ms. Você pode ajustar esse valor.
-
-    })();
-    */
+    function logarOuDeslogar(){
+        if (auth.currentUser){
+            logout()
+            location.reload();
+        }else{
+            goto("/login")
+        }
+    }
 </script>
 <header>
     <h1><a href="/">HealthQuery</a></h1>
     <h3>
         {$dinheiro} <i class="fa-solid fa-circle-dollar-to-slot"></i>
-        {#if mostrarBotao}
-             <a class="login" href="login">
-                 {#if estalogado}
+        {#if $page.url.pathname !== "/login" && $page.url.pathname !== "/register"}
+            <button on:click={logarOuDeslogar}>
+                {#if auth.currentUser}
                     Deslogar
-                 {:else}
+                {:else}
                     Log-in
-                 {/if}
-             </a>
+                {/if}
+            </button>
         {/if}
     </h3>
 </header>
@@ -64,7 +59,7 @@
         text-decoration: none;
         color: var(--color-BG);
     }
-    a.login{
+    button{
         width: 100vw;
         max-width: 10rem;
         margin-left: 10px;
@@ -81,7 +76,7 @@
         background-color: transparent;
         border: 2px solid;
     }
-    a.login:hover{
+    button:hover{
         transform: scale(1.05);
     }
     i{

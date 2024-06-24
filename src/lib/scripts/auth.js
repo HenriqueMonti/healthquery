@@ -1,11 +1,8 @@
-import { auth, signInWithEmailAndPassword } from '$scripts/firebaseInit';
+import { auth, signInWithEmailAndPassword, onAuthStateChanged } from '$scripts/firebaseInit';
 import { writable } from 'svelte/store';
 
-// Define a store para o estado de autenticação
 export const isAuthenticated = writable(false);
-/*setContext("isAuthenticated", isAuthenticated)*/
 
-// Função de login com tipos explícitos
 export async function login(email, password) {
     try {
         await signInWithEmailAndPassword(auth, email, password);
@@ -16,8 +13,17 @@ export async function login(email, password) {
     }
 }
 
-// Função de logout
 export function logout() {
     auth.signOut();
     isAuthenticated.set(false);
 }
+
+export const user = writable(null);
+
+onAuthStateChanged(auth, (firebaseUser) => {
+    if (firebaseUser) {
+        user.set(firebaseUser);
+    } else {
+        user.set(null);
+    }
+});

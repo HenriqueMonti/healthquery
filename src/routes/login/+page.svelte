@@ -1,16 +1,23 @@
 <script>
-	import { login } from "$scripts/auth";
+	import { goto } from "$app/navigation";
+	import { auth, signInWithEmailAndPassword } from "$scripts/firebaseInit";
 
     let email;
     let senha;
 
-    function doLogin() {
-        login(email, senha);
+    async function doLogin() {
+        try {
+            await signInWithEmailAndPassword(auth, email, senha);
+        } catch (error) {
+            console.error('Erro ao autenticar: ', error);
+        }
+        //console.log(auth.currentUser)
+        goto("/")
     }
 </script>
 <div class="container">
     <label for="email">E-mail:</label>
-    <input type="text" id="email" bind:value={email} />
+    <input type="email" id="email" bind:value={email} autocomplete="current-password" />
 
     <label for="senha">Senha:</label>
     <input type="password" id="senha" bind:value={senha} />
