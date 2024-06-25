@@ -1,11 +1,12 @@
 <script>
-    //o js que eu quiser kk
+	import LeaderboardMassa from "$components/LeaderboardMassa.svelte";
 </script>
 <div class="bulletpoints">
     <a href="/quiz">Healthy Quiz</a>
     <a href="/checkup">Healthy Check Up</a>
     <a href="/">Healthy Chat</a>
 </div>
+<LeaderboardMassa></LeaderboardMassa>
 <style>
     .bulletpoints {
         display: flex;
