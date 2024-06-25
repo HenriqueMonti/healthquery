@@ -1,4 +1,5 @@
 import { auth, signInWithEmailAndPassword, onAuthStateChanged } from '$scripts/firebaseInit';
+import { getDatabase, ref, query, orderByChild, equalTo, get } from "firebase/database";
 import { writable } from 'svelte/store';
 
 export const isAuthenticated = writable(false);
@@ -19,6 +20,28 @@ export function logout() {
 }
 
 export const user = writable(null);
+
+const database = getDatabase();
+
+export async function getUserDataByEmail(email) {
+    try {
+        const userRef = ref(database, 'users');
+        const emailQuery = query(userRef, orderByChild('email'));
+        const querySnapshot = await get(emailQuery);
+
+        if (querySnapshot.exists()) {
+            const userData = Object.values(querySnapshot.val())
+            .filter(user => user[Object.keys(user)[0]].email === email)[0]
+            return userData[Object.keys(userData)[0]];
+        } else {
+            console.log('No such document!');
+            return null;
+        }
+    } catch (error) {
+        console.error('Erro ao obter dados do usuário: ', error);
+        return null;
+    }
+}
 
 onAuthStateChanged(auth, (firebaseUser) => {
     if (firebaseUser) {

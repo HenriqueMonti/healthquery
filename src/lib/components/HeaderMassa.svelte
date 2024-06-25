@@ -2,8 +2,29 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { auth } from '$scripts/firebaseInit';
-    import { dinheiro } from '$scripts/stores';
 	import { signOut } from 'firebase/auth';
+    import { getUserDataByEmail } from '$scripts/auth';
+	import { onMount } from 'svelte';
+	import { writable } from 'svelte/store';
+
+    let userData = writable(null);
+
+    async function fetchUserData() {
+        if (auth.currentUser) {
+            const data = await getUserDataByEmail(auth.currentUser.email);
+            userData.set(data);
+        } else {
+            userData.set(null);
+        }
+    }
+
+    onMount(() => {
+        fetchUserData();
+    });
+
+    auth.onAuthStateChanged(() => {
+        fetchUserData();
+    });
 
     export async function logout() {
         try {
@@ -26,9 +47,11 @@
 <header>
     <h1><a href="/">HealthQuery</a></h1>
     <h3>
-        {$dinheiro} <i class="fa-solid fa-circle-dollar-to-slot"></i>
         {#if $page.url.pathname !== "/login" && $page.url.pathname !== "/register"}
-            <button on:click={logarOuDeslogar}>
+        {#if auth.currentUser && $userData?.dinheiro != null}
+            {$userData.dinheiro} <i class="fa-solid fa-circle-dollar-to-slot"></i>
+        {/if}
+        <button on:click={logarOuDeslogar}>
                 {#if auth.currentUser}
                     Deslogar
                 {:else}

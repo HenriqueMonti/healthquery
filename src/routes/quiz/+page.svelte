@@ -1,10 +1,7 @@
 <script>
     import QuizMassa from "$components/QuizMassa.svelte";
     import GabaritoMassa from "$components/GabaritoMassa.svelte";
-    import { loadFromSessionStorage, saveToSessionStorage } from '$scripts/sessionStorage';
 	import { goto } from "$app/navigation";
-	import { saveData } from "$lib/scripts/firebase";
-    import { dinheiro } from '$scripts/stores';
     import { listaDePerguntas } from "$scripts/perguntas.js";
 
     let perguntasEmbaralhadas = shuffle(listaDePerguntas);
@@ -45,13 +42,8 @@
             let texto = `Quiz concluído! Você acertou ${acertou} de ${perguntas.length} perguntas.`;
             sessionStorage.setItem('texto', texto);
             goto('/quiz/resultado');
-            dinheiro.update(currentValue => currentValue + acertou);
-            const exampleData = {
-                name: 'USUÁRIO_ANÔNIMO_3000',
-                dinheiro: Number(loadFromSessionStorage("dinheiro") || 0),
-                email: 'exemplo@univag.edu.br'
-            };
-            saveData('users/user1', exampleData);
+            //TODO: userData.dinheiro += 1
+            //TODO: saveData(userData);
         }
     }
 </script>
