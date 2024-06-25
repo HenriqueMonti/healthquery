@@ -1,5 +1,7 @@
 <script>
 	import { goto } from "$app/navigation";
+	import { auth } from "$scripts/firebaseInit";
+	import { createUserWithEmailAndPassword } from "firebase/auth";
 
     let nome;
     let email;
@@ -7,17 +9,50 @@
     let senha2;
     let errorMessage = '';
 
-    function doRegister() {
+    async function doRegister() {
         if (senha !== senha2) {
             errorMessage = 'As senhas não coincidem';
             return;
         }
-        fetch("/register", {method:"POST", body:JSON.stringify({
-            nome, email, senha
-        }), headers: {
-            'content-type': 'application/json'
-        }})
-        goto("/login")
+        try {
+            // user
+            await createUserWithEmailAndPassword(auth, email, senha);
+            // userData
+            const response = await fetch("/register", {method:"POST", body:JSON.stringify({
+                nome, email
+            }), headers: {
+                'content-type': 'application/json'
+            }})
+            if (!response.ok){
+                throw new Error("RESPONSE NOT OKAY")
+            }
+            alert("Registrado com sucesso!")
+            goto("/login")
+        } catch (error) {
+            errorMessage = 'Houve um erro inesperado ao tentar registrar.'
+
+            if (error.code){ //eu fiz escadinha no codigo ;-;
+                switch (error.code) {
+                    case "auth/network-request-failed":
+                        errorMessage = "Verifique a conexão com a internet."
+                        break
+                    case "auth/email-already-in-use":
+                        errorMessage = "O E-mail informado já está em uso. Utilize outro ou faça log-in."
+                        break
+                    case "auth/invalid-email":
+                        errorMessage = "E-mail inválido. Verifique o formato do E-mail informado."
+                        break
+                    case "auth/weak-password":
+                        errorMessage = "Senha fraca. Por favor, use uma senha mais forte."
+                        break
+                    default:
+                        console.error("ERRO:", error.code, error.message)
+                        break
+                }
+            } else if (error.message) {
+                console.error(error.message);
+            }
+        }
     }
 </script>
 <div class="container">
@@ -34,16 +69,16 @@
     <input type="password" id="confirma-senha"  bind:value={senha2} autocomplete="new-password"/>
 
     {#if errorMessage}
-        <p style="color: red;">{errorMessage}</p>
+        <p>{errorMessage}</p>
     {/if}
     
-    <a href="login">Já estou cadastrado</a>
     <button type="submit" on:click={doRegister}>Cadastrar-se</button>
+    <a href="login">Já estou cadastrado</a>
 </div>
 <style>
     button {
         padding: 10px 20px;
-        background-color: #4CAF50;
+        background-color: var(--color-BT);
         color: white;
         border: none;
         border-radius: 4px;
@@ -58,7 +93,13 @@
         margin-bottom: 5px;
         width: 50%;
     }
-    button{
+    button, a, p{
         margin-top: 10px;
+    }
+    p{
+        color: var(--color-BG);
+        background-color: var(--color-BT-INCORRETO);
+        border: 10px solid var(--color-BT-INCORRETO);
+        border-radius: 2rem;
     }
 </style>
