@@ -1,5 +1,5 @@
 import { auth, signInWithEmailAndPassword, onAuthStateChanged } from '$scripts/firebaseInit';
-import { getDatabase, ref, query, orderByChild, equalTo, get } from "firebase/database";
+import { getDatabase, ref, query, orderByChild, get, update } from "firebase/database";
 import { writable } from 'svelte/store';
 
 export const isAuthenticated = writable(false);
@@ -50,3 +50,13 @@ onAuthStateChanged(auth, (firebaseUser) => {
         user.set(null);
     }
 });
+
+export async function updateUserData(userId, data) {
+    try {
+        const userRef = ref(database, `users/${userId}`);
+        await update(userRef, data);
+        console.log("Dados do usuásrio atualizados com sucesso.");
+    } catch (error) {
+        console.error("Erro ao atualizar dados do usuário:", error);
+    }
+}

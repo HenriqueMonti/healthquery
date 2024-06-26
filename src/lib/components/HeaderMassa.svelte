@@ -26,26 +26,14 @@
         fetchUserData();
     });
 
-    export async function logout() {
+    export async function deslogar() {
         try {
             await signOut(auth);
             console.log('Usuário deslogado com sucesso');
         } catch (error) {
             console.error('Erro ao deslogar: ', error);
         }
-    }
-
-    function deslogar(){
-        logout()
         location.reload();
-    }
-    
-    function gotologin(){
-        goto("/login")
-    }
-
-    function gotoloja(){
-        goto("/loja")
     }
 </script>
 <header>
@@ -56,7 +44,7 @@
                 {$userData.dinheiro} <i class="fa-solid fa-circle-dollar-to-slot"></i>
             {/if}
             {#if auth.currentUser}
-                <button on:click={gotoloja} class="tooltip circular">
+                <button on:click={() => goto("/loja")} class="tooltip circular">
                     <i class="fa-solid fa-store" style="color: var(--color-HEADER);"></i>
                     <span class="tooltiptext">LOJA</span>
                 </button>
@@ -65,7 +53,7 @@
                     <i class="fa-solid fa-right-from-bracket" style="color: var(--color-HEADER);"></i>
                 </button>
             {:else}
-                <button on:click={gotologin}>
+                <button on:click={() => goto("/login")}>
                     Login
                 </button>
             {/if}
