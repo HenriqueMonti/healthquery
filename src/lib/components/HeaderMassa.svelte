@@ -6,6 +6,7 @@
     import { getUserDataByEmail } from '$scripts/auth';
 	import { onMount } from 'svelte';
 	import { writable } from 'svelte/store';
+	import { consoleLog, consoleError } from '$scripts/consoleUtils';
 
     let userData = writable(null);
 
@@ -28,10 +29,11 @@
 
     export async function deslogar() {
         try {
+
             await signOut(auth);
-            console.log('Usuário deslogado com sucesso');
+            consoleLog('Usuário deslogado com sucesso.');
         } catch (error) {
-            console.error('Erro ao deslogar: ', error);
+            consoleError('Erro ao deslogar: ', error);
         }
         location.reload();
     }

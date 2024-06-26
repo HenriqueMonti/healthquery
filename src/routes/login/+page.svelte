@@ -1,5 +1,6 @@
 <script>
 	import { goto } from "$app/navigation";
+	import { consoleError } from "$scripts/consoleUtils";
 	import { auth, signInWithEmailAndPassword } from "$scripts/firebaseInit";
 
     let email;
@@ -30,7 +31,7 @@
                     errorMessage = "E-mail inválido. Verifique o formato do E-mail informado."
                     break
                 default:
-                    console.error("ERRO:", error.code, error.message)
+                    consoleError("ERRO:", error.code, error.message)
                     break
             }
 

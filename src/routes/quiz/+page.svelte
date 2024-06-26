@@ -6,6 +6,7 @@
 	import { getUserDataByEmail, updateUserData } from "$scripts/auth";
 	import { auth } from "$scripts/firebaseInit";
 	import { writable } from "svelte/store";
+	import { consoleError } from "$scripts/consoleUtils";
 
     let perguntasEmbaralhadas = shuffle(listaDePerguntas);
     let metade = Math.floor(listaDePerguntas.length / 2);
@@ -54,7 +55,7 @@
                         const userId = auth.currentUser.uid;
                         await updateUserData(userId, { dinheiro: (data.dinheiro || 0) + acertos })
                     } else {
-                        console.error("🙀 Carambolas!")
+                        consoleError("Carambolas!")
                     }
                     return data;
                 });

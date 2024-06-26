@@ -1,4 +1,4 @@
-// src/sessionStorage.js
+import { consoleWarn } from "./consoleUtils";
 
 function isSessionStorageAvailable() {
     try {
@@ -15,7 +15,7 @@ export function saveToSessionStorage(key, value) {
     if (isSessionStorageAvailable()) {
         sessionStorage.setItem(key, JSON.stringify(value));
     } else {
-        console.warn('Problema ao salvar: sessionStorage não está disponível.');
+        consoleWarn('sessionStorage não salvo.');
     }
 }
 
@@ -24,7 +24,7 @@ export function loadFromSessionStorage(key) {
         const storedValue = sessionStorage.getItem(key);
         return storedValue ? JSON.parse(storedValue) : null;
     } else {
-        console.warn('Problema ao loadar: sessionStorage não está disponível.');
+        consoleWarn('sessionStorage não carregado.');
         return null;
     }
 }

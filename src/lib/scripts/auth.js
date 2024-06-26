@@ -1,6 +1,7 @@
 import { auth, signInWithEmailAndPassword, onAuthStateChanged } from '$scripts/firebaseInit';
 import { getDatabase, ref, query, orderByChild, get, update } from "firebase/database";
 import { writable } from 'svelte/store';
+import { consoleError, consoleWarn, consoleLog } from './consoleUtils';
 
 export const isAuthenticated = writable(false);
 
@@ -9,7 +10,7 @@ export async function login(email, password) {
         await signInWithEmailAndPassword(auth, email, password);
         isAuthenticated.set(true);
     } catch (error) {
-        console.error('Erro ao autenticar: ', error);
+        consoleError('Erro ao autenticar: ', error);
         return false
     }
 }
@@ -34,11 +35,11 @@ export async function getUserDataByEmail(email) {
             .filter(user => user[Object.keys(user)[0]].email === email)[0]
             return userData[Object.keys(userData)[0]];
         } else {
-            console.log('No such document!');
+            consoleWarn('Snapshot da query não encontrada.');
             return null;
         }
     } catch (error) {
-        console.error('Erro ao obter dados do usuário: ', error);
+        consoleError('Erro ao obter dados do usuário: ', error);
         return null;
     }
 }
@@ -55,8 +56,8 @@ export async function updateUserData(userId, data) {
     try {
         const userRef = ref(database, `users/${userId}`);
         await update(userRef, data);
-        console.log("Dados do usuásrio atualizados com sucesso.");
+        consoleLog("Dados do usuásrio atualizados com sucesso.");
     } catch (error) {
-        console.error("Erro ao atualizar dados do usuário:", error);
+        consoleError("Erro ao atualizar dados do usuário:", error);
     }
 }
