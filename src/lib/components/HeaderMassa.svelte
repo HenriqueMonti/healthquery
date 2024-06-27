@@ -1,5 +1,4 @@
 <script>
-	import { goto } from '$app/navigation';
     import { dinheiro } from '$scripts/stores';
 </script>
 <header>
@@ -13,6 +12,18 @@
     </h3>
 </header>
 <style>
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 28px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        h1 {
+            font-size: 24px;
+        }
+    }
+
     .tooltip{
         position: relative;
         display: inline-block;
