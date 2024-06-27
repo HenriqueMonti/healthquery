@@ -1,65 +1,15 @@
 <script>
 	import { goto } from '$app/navigation';
-	import { page } from '$app/stores';
-	import { auth } from '$scripts/firebaseInit';
-	import { signOut } from 'firebase/auth';
-    import { getUserDataByEmail } from '$scripts/auth';
-	import { onMount } from 'svelte';
-	import { writable } from 'svelte/store';
-	import { consoleLog, consoleError } from '$scripts/consoleUtils';
-
-    let userData = writable(null);
-
-    async function fetchUserData() {
-        if (auth.currentUser) {
-            const data = await getUserDataByEmail(auth.currentUser.email);
-            userData.set(data);
-        } else {
-            userData.set(null);
-        }
-    }
-
-    onMount(() => {
-        fetchUserData();
-    });
-
-    auth.onAuthStateChanged(() => {
-        fetchUserData();
-    });
-
-    export async function deslogar() {
-        try {
-
-            await signOut(auth);
-            consoleLog('Usuário deslogado com sucesso.');
-        } catch (error) {
-            consoleError('Erro ao deslogar: ', error);
-        }
-        location.reload();
-    }
+    import { dinheiro } from '$scripts/stores';
 </script>
 <header>
     <h1><a href="/">HealthQuery</a></h1>
     <h3>
-        {#if $page.url.pathname !== "/login" && $page.url.pathname !== "/register"}
-            {#if auth.currentUser && $userData?.dinheiro != null}
-                {$userData.dinheiro} <i class="fa-solid fa-circle-dollar-to-slot"></i>
-            {/if}
-            {#if auth.currentUser}
-                <button on:click={() => goto("/loja")} class="tooltip circular">
-                    <i class="fa-solid fa-store" style="color: var(--color-HEADER);"></i>
-                    <span class="tooltiptext">LOJA</span>
-                </button>
-                <button on:click={deslogar} class="tooltip circular">
-                    <span class="tooltiptext">LOG-OUT</span>
-                    <i class="fa-solid fa-right-from-bracket" style="color: var(--color-HEADER);"></i>
-                </button>
-            {:else}
-                <button on:click={() => goto("/login")}>
-                    Login
-                </button>
-            {/if}
-        {/if}
+        <h2>{$dinheiro}<i class="fa-solid fa-circle-dollar-to-slot"></i></h2>
+        <a href="/loja" class="tooltip circular">
+            <i class="fa-solid fa-store offsetzasso" style="color: var(--color-HEADER);"></i>
+            <span class="tooltiptext">LOJA</span>
+        </a>
     </h3>
 </header>
 <style>
@@ -107,28 +57,15 @@
         right: 10px;
         color: var(--color-BG);
     }
+    h2{
+        margin-top: 0.4rem;
+        margin-right: 1rem;
+    }
     a{
         text-decoration: none;
         color: var(--color-BG);
     }
-    button{
-        width: 100vw;
-        max-width: 10rem;
-        margin-left: 10px;
-        text-align: center;
-        color: var(--color-BG);
-        font-weight: 600;
-        padding: 2%;
-        border-radius: 1em;
-        text-decoration: none;
-        transition: 200ms;
-        font-family: inherit;
-        border: inherit;
-        cursor: pointer;
-        background-color: transparent;
-        border: 2px solid;
-    }
-    button.circular{
+    a.circular{
         width: 100vw;
         max-width: 3rem;
         height: 100vh;
@@ -136,10 +73,11 @@
         border-radius: 3rem;
         background-color: var(--color-BG);
     }
-    button:hover{
+    a:hover{
         transform: scale(1.05);
     }
-    i{
-        margin-top: 5px;
+    .offsetzasso{
+        margin-top: 1rem;
+        margin-left: 0.8rem;
     }
 </style>

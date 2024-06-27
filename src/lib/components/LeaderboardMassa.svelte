@@ -1,7 +1,4 @@
 <script>
-	import { auth } from '$scripts/firebaseInit';
-
-    //TODO: SELECT Nos usuários reais do banco
     let usuarios_exemplo = [
         {nome: "Shimo", dinheiro: 150},
         {nome: "Bob", dinheiro: 200},
@@ -33,9 +30,7 @@
     }
 </style>
 
-{#if auth.currentUser}
 <div>
-    <h1>Placar de exemplo</h1>
     <table>
         <thead>
             <tr>
@@ -59,4 +54,3 @@
         </tbody>
     </table>
 </div>
-{/if}

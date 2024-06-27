@@ -3,10 +3,9 @@
     import GabaritoMassa from "$components/GabaritoMassa.svelte";
 	import { goto } from "$app/navigation";
     import { listaDePerguntas } from "$scripts/perguntas.js";
-	import { getUserDataByEmail, updateUserData } from "$scripts/auth";
-	import { auth } from "$scripts/firebaseInit";
-	import { writable } from "svelte/store";
-	import { consoleError } from "$scripts/consoleUtils";
+	import { dinheiro } from "$scripts/stores";
+	import { loadFromSessionStorage } from "$scripts/sessionStorage";
+	import { saveData } from "$scripts/firebase";
 
     let perguntasEmbaralhadas = shuffle(listaDePerguntas);
     let metade = Math.floor(listaDePerguntas.length / 2);
@@ -46,20 +45,13 @@
             let texto = `Quiz concluído! Você acertou ${acertos} de ${perguntas.length} perguntas.`;
             sessionStorage.setItem('texto', texto);
             
-            if (auth.currentUser) {
-                let userData = writable(null);
-                const data = await getUserDataByEmail(auth.currentUser.email);
-                userData.set(data);
-                userData.update(async data => {
-                    if (data) {
-                        const userId = auth.currentUser.uid;
-                        await updateUserData(userId, { dinheiro: (data.dinheiro || 0) + acertos })
-                    } else {
-                        consoleError("Carambolas!")
-                    }
-                    return data;
-                });
-            }
+            dinheiro.update(currentValue => currentValue + acertos);
+            const exampleData = {
+                name: 'USUÁRIO_ANÔNIMO_3000',
+                dinheiro: Number(loadFromSessionStorage("dinheiro") || 0),
+                email: 'exemplo@univag.edu.br'
+            };
+            saveData('users/user1', exampleData);
 
             goto('/quiz/resultado');
         }
