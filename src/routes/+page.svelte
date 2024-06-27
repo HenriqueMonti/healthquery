@@ -4,7 +4,6 @@
 <div class="bulletpoints">
     <a href="/quiz">Healthy Quiz</a>
     <a href="/checkup">Healthy Check Up</a>
-    <a href="/">Healthy Chat</a>
 </div>
 <LeaderboardMassa></LeaderboardMassa>
 <style>
