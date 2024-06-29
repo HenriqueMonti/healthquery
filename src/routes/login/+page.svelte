@@ -16,7 +16,7 @@
         mostrarEsqueceuSenha = false;
         try {
             await signInWithEmailAndPassword(auth, email, senha);
-            dinheiro.update(currentValue => -1);
+            dinheiro.update(currentValue => 0);
             if (auth.currentUser) {
                 const data = await getUserDataByEmail(email);
                 userData.set(data);

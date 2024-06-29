@@ -1,5 +1,6 @@
 <script>
     import { onMount } from 'svelte';
+    import xd from "$lib/images/hqclubp.gif";
     
     let texto = '';
     
@@ -18,6 +19,7 @@
     <h1>{texto}</h1>
     <a href="/quiz">Reiniciar Quiz</a>
     <a href="/">Voltar ao Início</a>
+    <img src={xd} alt="">
 </div>
 <style>
     .bulletpoints {
