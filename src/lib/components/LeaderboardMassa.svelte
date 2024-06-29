@@ -71,7 +71,8 @@
         padding: 0 1rem;
     }
     table{
-        width: 50%;
+        width: 100%;
+        max-width: 75%;
         border-collapse: collapse;
     }
     th, td{
