@@ -1,17 +1,29 @@
 <script>
 	import { goto } from "$app/navigation";
+	import { getUserDataByEmail } from "$scripts/auth";
 	import { consoleError } from "$scripts/consoleUtils";
 	import { auth, signInWithEmailAndPassword } from "$scripts/firebaseInit";
+	import { dinheiro } from "$scripts/stores";
+	import { writable } from "svelte/store";
 
     let email;
     let senha;
     let errorMessage = '';
     let mostrarEsqueceuSenha = false;
+    let userData = writable(null);
     
     async function doLogin() {
         mostrarEsqueceuSenha = false;
         try {
             await signInWithEmailAndPassword(auth, email, senha);
+            dinheiro.update(currentValue => -1);
+            if (auth.currentUser) {
+                const data = await getUserDataByEmail(email);
+                userData.set(data);
+            } else {
+                userData.set(null);
+            }
+            dinheiro.update(currentValue => $userData.dinheiro);
             goto("/")
         } catch (error) {
             errorMessage = "Ocorreu um erro inesperado.";
