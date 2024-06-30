@@ -39,8 +39,17 @@
                     errorMessage = "Senha incorreta."
                     mostrarEsqueceuSenha = true;
                     break
+                case "auth/missing-email":
+                    errorMessage = "Por favor, preencha com o seu E-mail."
+                    break
+                case "auth/missing-password":
+                    errorMessage = "Por favor, preencha com a sua senha."
+                    break
                 case "auth/invalid-email":
                     errorMessage = "E-mail inválido. Verifique o formato do E-mail informado."
+                    break
+                case "auth/invalid-credential":
+                    errorMessage = "Credenciais incorretas."
                     break
                 default:
                     consoleError("ERRO:", error.code, error.message)
