@@ -2,6 +2,7 @@
 	import { goto } from "$app/navigation";
 	import { addData } from "$scripts/firebase";
     import { listaDeCheckup } from "$scripts/perguntas.js";
+	import { fezCheckup } from "$scripts/stores";
 
     function submittar(event) {
         event.preventDefault();
@@ -11,7 +12,8 @@
             data[key] = value;
         });
         addData('users/user1/checkup', data);
-        goto("/");
+        fezCheckup.update(_ => 1)
+        goto("/checkup/resultado");
     }
 </script>
 <section>

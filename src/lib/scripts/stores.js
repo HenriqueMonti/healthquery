@@ -12,3 +12,9 @@ export const darkMode = writable(initialValue2);
 darkMode.subscribe((value) => {
     saveToSessionStorage('darkMode', value);
 });
+
+const initialValue3 = loadFromSessionStorage('fezCheckup') || 0;
+export const fezCheckup = writable(initialValue3);
+fezCheckup.subscribe((value) => {
+    saveToSessionStorage('fezCheckup', value);
+});
