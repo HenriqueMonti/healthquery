@@ -27,8 +27,8 @@
                     <span class="tooltiptext">LOJA</span>
                 </a>
                 <button on:click={deslogar} class="tooltip circular">
-                    <span class="tooltiptext">LOG-OUT</span>
                     <i class="fa-solid fa-right-from-bracket" style="color: var(--color-HEADER);"></i>
+                    <span class="tooltiptext">LOG-OUT</span>
                 </button>
             {:else}
                 <button on:click={() => goto("/login")}>
@@ -126,7 +126,7 @@
         padding: 2%;
         border-radius: 1em;
         text-decoration: none;
-        transition: 200ms;
+        transition: 200ms transform;
         font-family: inherit;
         border: inherit;
         cursor: pointer;
@@ -134,7 +134,7 @@
         border: 2px solid;
     }
 
-    a:hover{
+    a:hover, button:hover{
         transform: scale(1.05);
     }
     

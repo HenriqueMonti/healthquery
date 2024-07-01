@@ -53,7 +53,7 @@
         background: var(--color-BT-OFF);
         border-radius: 1em;
         text-decoration: none;
-        transition: 200ms;
+        transition: 200ms transform;
         font-family: inherit;
         border: inherit;
         cursor: default;
@@ -77,7 +77,7 @@
         background-color: transparent;
         color: var(--color-TEXTO-OFF);
         cursor: pointer;
-        transition: 200ms;
+        transition: 200ms transform;
         border: 2px solid;
     }
     .gabarito .avancar:hover {
