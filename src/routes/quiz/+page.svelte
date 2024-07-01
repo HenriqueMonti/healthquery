@@ -65,8 +65,8 @@
 
 							// Salva os dados no banco de dados usando o UID do usuário
 							const nome = data.nome
-                            const uid = auth.currentUser.uid
-                            //await saveData('users/'+nome+"/"+uid, data);
+                            const uid = data.uid
+                            await saveData('users/'+nome+"/"+uid, data);
 
 							// Redireciona para a página de resultados
 							goto('/quiz/resultado');

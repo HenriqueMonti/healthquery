@@ -33,6 +33,7 @@ export async function getUserDataByEmail(email) {
         if (querySnapshot.exists()) {
             const userData = Object.values(querySnapshot.val())
             .filter(user => user[Object.keys(user)[0]].email === email)[0]
+            userData[Object.keys(userData)[0]].uid = Object.keys(userData)[0]
             return userData[Object.keys(userData)[0]];
         } else {
             consoleWarn('Snapshot da query não encontrada.');
