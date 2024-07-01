@@ -1,5 +1,4 @@
 <script>
-	import { saveToSessionStorage } from "$scripts/sessionStorage";
     export let imagem;
 	export let nome;
 	export let preco;
@@ -9,19 +8,29 @@
 	export let equipado; //TODO
 	export let index; //TODO
 	let errorMessage;
+
 	import { dinheiro, loja } from "$scripts/stores";
     import somComprar from "$sounds/buy_1.mp3";
+	import { getAuth, onAuthStateChanged } from "firebase/auth";
+	import { goto } from "$app/navigation";
+	import { getUserDataByEmail } from "$scripts/auth";
+	import { saveData } from "$scripts/firebase";
+	import { auth } from "$scripts/firebaseInit";
+	import { saveToSessionStorage } from "$scripts/sessionStorage";
+
     const CATCHING = new Audio(somComprar);
 
 	function handleonclick() {
 		errorMessage = null;
         if (!comprado){
 			if ($dinheiro >= preco) {
+				CATCHING.play();
+				dinheiro.update(_ => $dinheiro - preco);
+				atualizardineros();
+
 				equipado = oncompra();
 				loja.update(old => {old[index].equipado = equipado ; return old}); //TODO
 				comprado = true;
-				CATCHING.play();
-				dinheiro.update(_ => $dinheiro - preco);
 				loja.update(old => {old[index].comprado = true ; return old}); //TODO
 			} else {
 				errorMessage = "Dinheiro insuficiente!"
@@ -34,6 +43,29 @@
 			//console.log(value);
     		saveToSessionStorage('loja', value);
 		});
+	}
+
+	async function atualizardineros(){
+		if (auth.currentUser) {
+			try {
+				let data = await getUserDataByEmail(auth.currentUser.email);
+				const authInstance = getAuth();
+				const updateAndSaveData = async (user) => {
+					if (user) {
+						data.dinheiro = $dinheiro; //(data.dinheiro || 0) - VALOR_DO_ITEM;
+						// Salva os dados no banco de dados usando o UID do usuário
+						const nome = data.nome
+                        const uid = data.uid
+                        await saveData('users/'+nome+"/"+uid, data);
+					} else {
+						console.log('Nenhum usuário autenticado.');
+					}
+				};
+				onAuthStateChanged(authInstance, updateAndSaveData);
+			} catch (error) {
+				console.error('Erro ao obter ou salvar dados do usuário:', error);
+			}
+		}
 	}
 </script>
 
