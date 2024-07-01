@@ -44,7 +44,7 @@
     {#await usuarios}
     <img src={loading} alt="">
     {:then value}
-        <h1 style="margin-top: -17rem; position: absolute">Placar global</h1>
+        <h1>Placar global</h1>
         <table>
             <thead>
                 <tr>
@@ -74,10 +74,13 @@
 <style>
     div{
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
         height: 50vh;
         padding: 0 1rem;
+        gap: 1rem;
+        margin-top: 1rem;
     }
     table{
         width: 100%;
