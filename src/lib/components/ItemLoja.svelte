@@ -3,23 +3,32 @@
     export let imagem;
 	export let nome;
 	export let preco;
+	export let oncompra;
 	export let onclick;
-	export let comprado;
-	export let equipado;
-	export let index;
+	export let comprado; //TODO
+	export let equipado; //TODO
+	export let index; //TODO
+	let errorMessage;
 	import { dinheiro, loja } from "$scripts/stores";
     import somComprar from "$sounds/buy_1.mp3";
     const CATCHING = new Audio(somComprar);
 
 	function handleonclick() {
+		errorMessage = null;
         if (!comprado){
-            comprado = true;
-            CATCHING.play();
-            dinheiro.update(_ => $dinheiro - preco);
-			loja.update(old => {old[index].comprado = true ; return old});
+			if ($dinheiro >= preco) {
+				equipado = oncompra();
+				loja.update(old => {old[index].equipado = equipado ; return old}); //TODO
+				comprado = true;
+				CATCHING.play();
+				dinheiro.update(_ => $dinheiro - preco);
+				loja.update(old => {old[index].comprado = true ; return old}); //TODO
+			} else {
+				errorMessage = "Dinheiro insuficiente!"
+			}
         }else{
 			equipado = onclick(equipado);
-			loja.update(old => {old[index].equipado = equipado ; return old});
+			loja.update(old => {old[index].equipado = equipado ; return old}); //TODO
         }
 		loja.subscribe((value) => {
 			//console.log(value);
@@ -39,6 +48,9 @@
         <i class="fa-solid fa-check check"></i>
     {/if}
 </button>
+{#if errorMessage}
+    <p class = "erro">{errorMessage}</p>
+{/if}
 
 <style>
     .check {
@@ -93,4 +105,11 @@
 	button:focus {
 		outline: none;
 	}
+
+	p.erro{
+        color: var(--color-BG);
+        background-color: var(--color-BT-INCORRETO);
+        border: 10px solid var(--color-BT-INCORRETO);
+        border-radius: 2rem;
+    }
 </style>

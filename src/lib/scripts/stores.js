@@ -13,6 +13,18 @@ darkMode.subscribe((value) => {
     saveToSessionStorage('darkMode', value);
 });
 
+const initial_darkmodeComprado = loadFromSessionStorage('darkModeComprado') || 0;
+export const darkModeComprado = writable(initial_darkmodeComprado);
+darkModeComprado.subscribe((value) => {
+    saveToSessionStorage('darkModeComprado', value);
+});
+
+const initial_impulso = loadFromSessionStorage('impulso') || 0;
+export const impulso = writable(initial_impulso);
+impulso.subscribe((value) => {
+    saveToSessionStorage('impulso', value);
+});
+
 const initial_fezCheckup = loadFromSessionStorage('fezCheckup') || 0;
 export const fezCheckup = writable(initial_fezCheckup);
 fezCheckup.subscribe((value) => {

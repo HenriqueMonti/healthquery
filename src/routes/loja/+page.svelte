@@ -1,37 +1,48 @@
 <script>
-    import { darkMode, loja } from "$scripts/stores";
+    import { loja, darkMode, impulso, darkModeComprado } from "$scripts/stores";
 	import { atualizarTema } from "../+layout.svelte";
     import ItemLoja from "$components/ItemLoja.svelte"
 	import { onMount } from "svelte";
 	import { loadFromSessionStorage } from "$scripts/sessionStorage";
 
-    function comprarDarkMode(equipado){
+    function comprarDarkMode(){
+        darkModeComprado.update(_ => 1)
+    }
+
+    function equiparDarkMode(equipado){
         equipado = !equipado ? 1 : 0;
         darkMode.update(_ => equipado)
         atualizarTema(equipado);
         return equipado
     }
+    
+    function comprarImpulso() {
+        impulso.update(_ => 1)
+        return true
+    }
 
-    function comprarMorte(){
-        window.location.replace("https://esolangs.org/wiki/LOLCODE");
+    function equiparImpulso(){
+        return true
     }
 
     const initialLoja = [
         {
             imagem : "🌗",
-            nome : "Dark Mode",
-            preco : "0",
-            onclick : comprarDarkMode,
-            comprado : false,
+            nome : "Dark Mode (Equipável)",
+            preco : "2",
+            oncompra : comprarDarkMode,
+            onclick : equiparDarkMode,
+            comprado : $darkModeComprado,
             equipado : $darkMode
         },
         {
-            imagem : "💀",
-            nome : "Morte Instantânea",
+            imagem : "💊",
+            nome : "Impulsionar Próximo Quiz",
             preco : "3",
-            onclick : comprarMorte,
-            comprado : false,
-            equipado : false
+            oncompra: comprarImpulso,
+            onclick : equiparImpulso,
+            comprado : $impulso,
+            equipado : $impulso
         }
     ]
 
