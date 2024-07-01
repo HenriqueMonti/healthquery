@@ -1,6 +1,6 @@
 <script>
 	import { goto } from "$app/navigation";
-	import { addData } from "$scripts/firebase";
+	//import { addData } from "$scripts/firebase";
     import { listaDeCheckup } from "$scripts/perguntas.js";
 	import { fezCheckup } from "$scripts/stores";
 
@@ -11,7 +11,7 @@
         formData.forEach((value, key) => {
             data[key] = value;
         });
-        addData('users/user1/checkup', data);
+        //addData('users/user1/checkup', data);
         fezCheckup.update(_ => 1)
         goto("/checkup/resultado");
     }
