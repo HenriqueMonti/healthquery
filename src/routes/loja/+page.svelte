@@ -88,7 +88,7 @@
     <ItemLoja
     imagem = "💊"
     nome = "Impulsionar próximo quiz"
-    preco = "2"
+    preco = "3"
     oncompra = {comprarImpulso}
     onclick = {equiparImpulso}
     comprado = {$impulso}
