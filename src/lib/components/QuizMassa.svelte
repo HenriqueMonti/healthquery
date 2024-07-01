@@ -28,6 +28,7 @@
     .pergunta {
         max-width: 48rem;
         color: var(--color-TEXTO-OFF);
+        position: relative;
     }
     .bulletpoints {
         display: flex;
