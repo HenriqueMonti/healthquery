@@ -27,6 +27,13 @@
         }
     }
 
+    function truncateUsername(username, maxLength){
+        if (username.length > maxLength) {
+            return username.substring(0, maxLength) + "..."
+        }
+        return username
+    }
+
     let usuarios = getLeaderboard(5);
 
     let cores_medalha = ["gold", "silver", "brown"];
@@ -34,8 +41,9 @@
 
 <div>
     {#await usuarios}
-        <img src={loading} alt="">
+    <img src={loading} alt="">
     {:then value}
+        <h1 style="margin-top: -17rem; position: absolute">Placar global</h1>
         <table>
             <thead>
                 <tr>
@@ -52,7 +60,7 @@
                             {:else}
                                 <i class="fa-solid fa-medal" style="color: transparent;"></i>
                             {/if}
-                            {usuario.nome}
+                            {truncateUsername(usuario.nome, 25)}
                         </td>
                         <td class="nobreak">{usuario.dinheiro} <i class="fa-solid fa-circle-dollar-to-slot"></i></td>
                     </tr>
@@ -78,6 +86,7 @@
     th, td{
         border: 0.1px solid #ddd;
         padding: 8px;
+        white-space: nowrap;
     }
     th{
         background-color: #f2f2f2;

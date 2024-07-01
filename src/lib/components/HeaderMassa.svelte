@@ -21,7 +21,7 @@
     <h3>
         {#if $page.url.pathname !== "/login" && $page.url.pathname !== "/register"}
             {#if auth.currentUser}
-                <h2>{$dinheiro}<i class="fa-solid fa-circle-dollar-to-slot"></i></h2>
+                <h2 class="dinheiro">{$dinheiro}<i class="fa-solid fa-circle-dollar-to-slot"></i></h2>
                 <a href="/loja" class="tooltip circular">
                     <i class="fa-solid fa-store offsetzasso" style="color: var(--color-HEADER);"></i>
                     <span class="tooltiptext">LOJA</span>
@@ -31,7 +31,7 @@
                     <span class="tooltiptext">LOG-OUT</span>
                 </button>
             {:else}
-                <button on:click={() => goto("/login")}>
+                <button class="login" on:click={() => goto("/login")}>
                     Login
                 </button>
             {/if}
@@ -43,11 +43,22 @@
         h1 {
             font-size: 28px;
         }
+        .login {
+            max-width: 7rem;
+        }
     }
 
     @media (max-width: 480px) {
         h1 {
             font-size: 24px;
+            right: 4rem;
+        }
+        .login {
+            max-width: 5rem;
+            right: 4rem;
+        }
+        .dinheiro {
+            display: none;
         }
     }
 
@@ -119,6 +130,7 @@
     button{
         width: 100vw;
         max-width: 10rem;
+        min-height: 3rem;
         margin-left: 1rem;
         text-align: center;
         color: var(--color-BG);
