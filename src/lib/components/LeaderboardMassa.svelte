@@ -13,6 +13,7 @@
             if (querySnapshot.exists()) {
                 const users = Object.values(querySnapshot.val())
                 .map(user => user[Object.keys(user)[0]])
+                .sort((a, b) => b.dinheiro - a.dinheiro)
                 .slice(0,top)
                 return new Promise((r) => {
                     return setTimeout(() => {r(users)}, 1000)
