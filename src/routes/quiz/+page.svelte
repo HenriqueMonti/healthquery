@@ -3,7 +3,7 @@
     import GabaritoMassa from "$components/GabaritoMassa.svelte";
 	import { goto } from "$app/navigation";
     import { listaDePerguntas } from "$scripts/perguntas.js";
-	import { dinheiro } from "$scripts/stores";
+	import { dinheiro, impulso } from "$scripts/stores";
 	import { loadFromSessionStorage } from "$scripts/sessionStorage";
 	import { saveData } from "$scripts/firebase";
 
@@ -42,9 +42,13 @@
             respondeu = false;
             respostaSelecionada = 0;
         } else {
-            let texto = `Quiz concluído! Você acertou ${acertos} de ${perguntas.length} perguntas.`;
-            sessionStorage.setItem('texto', texto);
-            
+            sessionStorage.setItem('ultimoAcertos', ''+acertos);
+            sessionStorage.setItem('ultimoLength', ''+perguntas.length);
+            sessionStorage.setItem('multiplicou', $impulso);
+            if ($impulso){
+                dinheiro.update(currentValue => currentValue + acertos);
+                impulso.update(_ => 0);
+            }
             dinheiro.update(currentValue => currentValue + acertos);
             const exampleData = {
                 name: 'USUÁRIO_ANÔNIMO_3000',

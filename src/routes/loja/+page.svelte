@@ -4,6 +4,7 @@
     import ItemLoja from "$components/ItemLoja.svelte"
 	import { onMount } from "svelte";
 	import { loadFromSessionStorage } from "$scripts/sessionStorage";
+	import { consoleWarn } from "$scripts/consoleUtils";
 
     function comprarDarkMode(){
         darkModeComprado.update(_ => 1)
@@ -25,6 +26,7 @@
         return true
     }
 
+    /*
     const initialLoja = [
         {
             imagem : "🌗",
@@ -37,7 +39,7 @@
         },
         {
             imagem : "💊",
-            nome : "Impulsionar Próximo Quiz",
+            nome : "Impulsionar próximo quiz",
             preco : "3",
             oncompra: comprarImpulso,
             onclick : equiparImpulso,
@@ -55,6 +57,7 @@
             loja.update(old => old.map((a,i) => a.onclick = initialLoja[i].onclick))
         }
     })
+    */
 </script>
 
 <style>
@@ -68,7 +71,27 @@
 
 <div>
     <h1><b>FARMÁCIA</b></h1>
+    <!--
     {#each $loja as values, index (index)}
         <ItemLoja {...values}{index}/>
     {/each}
+    -->
+    <ItemLoja
+    imagem = "🌗"
+    nome = "Dark Mode (Equipável)"
+    preco = "2"
+    oncompra = {comprarDarkMode}
+    onclick = {equiparDarkMode}
+    comprado = {$darkModeComprado}
+    equipado = {$darkMode}
+    index = 1></ItemLoja>
+    <ItemLoja
+    imagem = "💊"
+    nome = "Impulsionar próximo quiz"
+    preco = "2"
+    oncompra = {comprarImpulso}
+    onclick = {equiparImpulso}
+    comprado = {$impulso}
+    equipado = {$impulso}
+    index = 2></ItemLoja>
 </div>

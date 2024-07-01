@@ -1,12 +1,24 @@
 <script>
     import { onMount } from 'svelte';
     import xd from "$lib/images/hqclubp.gif";
+	import { auth } from '$scripts/firebaseInit';
     
-    let texto = '';
+    let texto = "";
+    let texto2 = "";
     
     onMount(() => {
-        // @ts-ignore
-        texto = sessionStorage.getItem('texto');
+        let ganho = Number(sessionStorage.getItem('ultimoAcertos'))
+        let perguntas = Number(sessionStorage.getItem('ultimoLength'))
+        let multiplicou = Number(sessionStorage.getItem('multiplicou'))
+        texto = "Quiz concluído! Você acertou "+ganho+" de "+perguntas+" perguntas."
+        if (multiplicou && multiplicou > 0) {
+            texto2 = "+"+(ganho*2) + " (💊x2)"
+        } else {
+            texto2 = "+"+(ganho)
+        }
+        if (!auth.currentUser){
+            texto2 = "Faça login para fazer progresso!"
+        }
         if (texto === null) {
             window.location.href = '/';
         }else{
@@ -16,7 +28,14 @@
 </script>
 
 <div class="bulletpoints">
-    <h1>{texto}</h1>
+    {#if texto2}
+        <h1>{texto}</h1>
+        {#if auth.currentUser}
+            <h3>{texto2}  <i class="fa-solid fa-circle-dollar-to-slot"></i></h3>
+        {:else}
+            <h3>{texto2}</h3>
+        {/if}
+    {/if} 
     <a href="/quiz">Reiniciar Quiz</a>
     <a href="/">Voltar ao Início</a>
     <img src={xd} alt="">
@@ -42,5 +61,8 @@
     }
     .bulletpoints a:hover{
         transform: scale(1.02);
+    }
+    h3{
+        color: var(--color-TEXTO2);
     }
 </style>
