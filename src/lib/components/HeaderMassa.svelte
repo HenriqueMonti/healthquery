@@ -5,6 +5,30 @@
 	import { goto } from '$app/navigation';
 	import { consoleError, consoleLog } from '$scripts/consoleUtils';
 	import { signOut } from 'firebase/auth';
+    //import { getUserDataByEmail } from '$scripts/auth';
+	//import { onMount } from 'svelte';
+	//import { writable } from 'svelte/store';
+
+    /*
+    let userData = writable(null);
+
+    async function fetchUserData() {
+        if (auth.currentUser) {
+            const data = await getUserDataByEmail(auth.currentUser.email);
+            userData.set(data);
+        } else {
+            userData.set(null);
+        }
+    }
+
+    onMount(() => {
+        fetchUserData();
+    });
+
+    auth.onAuthStateChanged(() => {
+        fetchUserData();
+    });
+    */
 
     export async function deslogar() {
         try {

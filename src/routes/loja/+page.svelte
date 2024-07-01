@@ -2,9 +2,9 @@
     import { loja, darkMode, impulso, darkModeComprado } from "$scripts/stores";
 	import { atualizarTema } from "../+layout.svelte";
     import ItemLoja from "$components/ItemLoja.svelte"
-	import { onMount } from "svelte";
-	import { loadFromSessionStorage } from "$scripts/sessionStorage";
-	import { consoleWarn } from "$scripts/consoleUtils";
+	//import { onMount } from "svelte";
+	//import { loadFromSessionStorage } from "$scripts/sessionStorage";
+	//import { consoleWarn } from "$scripts/consoleUtils";
 
     function comprarDarkMode(){
         darkModeComprado.update(_ => 1)
